@@ -1,0 +1,73 @@
+{% extends 'candidate/indexhome.html' %}
+{% load static %}
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+              <h1>
+        Apply Vacancy
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'Candidatehome' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../vacancies/">Vacancy</a></li>
+        <li class="active">Details</li>
+      </ol>
+    </section>
+          <section class="content" style="margin-top:5%;">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- quick email widget -->
+          <div class="box box-info">
+            <div class="box-header">
+              <i class="fa fa-envelope"></i>
+
+              <h3 class="box-title">Apply vacancies</h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <div class="box-body">
+              <form action="{% url 'applyvacancyprocess' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <input type="hidden" name="vid" value="{{vid.id}}">
+                  <div class="form-group"><label>Candidate Name</label>
+                  <input type="text" class="form-control" name="candname" value="{{cnd.candidatename}}" readonly placeholder="Enter Candidate Name">
+                </div>
+                  <div class="form-group"><label>Candidate Email</label>
+                  <input type="text" class="form-control" name="candemail" value="{{cnd.email}}" readonly placeholder="Enter Candidate Email">
+                </div>
+                <div class="form-group"><label>Qualification</label>
+                  <input type="text" class="form-control" name="qualification" value="{{cnd.qualification}}" placeholder="Enter Qualification">
+                </div>
+                  <div class="form-group"><label>Key Skills</label>
+                  <input type="text" class="form-control" name="skill" placeholder="Enter Key Skills">
+                </div>
+                  <div class="form-group"><label>Contact No</label>
+                  <input type="text" class="form-control" name="contact" value="{{cnd.phone}}" placeholder="Enter Contact Number">
+                </div>
+                  <div class="form-group"><label>Experience</label>
+                  <input type="text" class="form-control" name="experience" placeholder="Enter Experience">
+                </div>
+                  <div class="form-group"><label>Location</label>
+                  <input type="text" class="form-control" name="location" placeholder="Your location">
+                </div>
+                  <div class="form-group"><label>Upload Resume</label>
+                  <input type="file" class="form-control" name="resumeupload" placeholder="Enter Qualification">
+                </div>
+                  <div>
+                <input type="submit" class="btn btn-success" value="Apply">
+            </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+          </section>
+         </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

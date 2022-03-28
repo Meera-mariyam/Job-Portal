@@ -1,0 +1,96 @@
+{% extends 'company/indexhome.html' %}
+{% load static %}
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+              <h1>
+        Add New Vacancy
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'Companyhome' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Notification</a></li>
+        <li class="active">Details</li>
+      </ol>
+    </section>
+          <section class="content" style="margin-top:5%;">
+               
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- quick email widget -->
+
+          <div class="box box-info">
+
+            <div class="box-header">
+
+              <i class="fa fa-envelope"></i>
+
+              <h3 class="box-title">New Vacancies</h3>
+              <!-- tools box -->
+
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <div class="box-body">
+              <form action="{% url 'vacancyprocess' %}" method="post">
+                {% csrf_token %}
+                  <div class="form-group"><label>Reference Code</label>
+                  <input type="text" class="form-control" name="referenceid" placeholder="Reference Id">
+                </div>
+                <div class="form-group"><label>Job Title</label>
+                  <input type="text" class="form-control" name="jobtitle" placeholder="ex : software engineer">
+                </div>
+
+                <div class="form-group"><label>Description</label>
+                  <textarea class="form-control" rows="10" name="description" placeholder="Job descriptions"></textarea>
+                </div>
+                <div class="form-group"><label>Key Skills</label>
+                  <textarea class="form-control" rows="10" name="skills" placeholder="skills ex:python,java"></textarea>
+                </div>
+                <div class="form-group"><label>Qualification</label>
+                  <input type="text" class="form-control" placeholder="Qualification" name="qualification">
+                </div>
+                   <div class="form-group"><label>City</label>
+                  <input type="text" class="form-control" placeholder="City" name="city">
+                </div>
+                 <div class="form-group"><label>State</label>
+                  <input type="text" class="form-control" placeholder="State" name="state">
+                </div>
+                 <div class="form-group"><label>Pin code</label>
+                  <input type="text" class="form-control" placeholder="Pincode" name="pincode">
+                </div>
+                 <div class="form-group"><label>Experience</label>
+                  <input type="text" class="form-control" placeholder="Experience" name="experience">
+                </div>
+                 <div class="form-group"><label>No of Opening</label>
+                  <input type="text" class="form-control" placeholder="No of opening" name="opening">
+                </div>
+                 <div class="form-group"><label>Published on</label>
+                  <input type="text" class="form-control" placeholder="published on date" name="publishedon">
+                </div>
+                 <div class="form-group"><label>Last date of Apply</label>
+                  <input type="text" class="form-control" placeholder="last date of Apply" name="dateapply">
+                </div>
+                 <div class="form-group"><label>Venue/Job location</label>
+                  <input type="text" class="form-control" placeholder="Venue/Job location" name="venue">
+                </div>
+                 <div class="form-group"><label>Contact Number</label>
+                  <input type="text" class="form-control" placeholder="contact number" name="contact">
+                </div>
+                  <div>
+                <input type="submit" class="btn btn-success" value="Add Vacancy">
+            </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+          </section>
+         </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

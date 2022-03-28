@@ -1,0 +1,81 @@
+{% extends 'Home/shared/base.html' %}
+{% load static %}
+{% block content %}
+  <main id="main">
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about" style="margin-top:10%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-6">
+            <div class="about-img">
+              <img src="{% static 'img/companyreg.jpg' %}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-6">
+            <div class="about-content">
+              <h2 align="center">Company Registration Here</h2>
+                 <div class="form">
+              <form action="{% url 'companyregprocess' %}" method="POST" name="log">
+                {% csrf_token %}
+                  <div class="form-group">
+                  <input type="text" name="companyname" required="" class="form-control" id="companyname" placeholder="Your Compnay Name" data-msg="Please enter Company name" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" required="" name="cregid" id="cregid" placeholder="Your Company Registration id" data-rule="cregid" data-msg="Company Registration id" />
+                  <div class="validation"></div>
+                </div>
+                   <div class="form-group">
+                  <textarea class="form-control" required="" name="address" rows="5" data-rule="required" data-msg="Please enter address" placeholder="Your Company Address"></textarea>
+                  <div class="validation"></div>
+                </div>
+                 <div class="form-group">
+                  <input type="text" class="form-control" required="" name="phonenumber" id="phonenumber" placeholder="Your Company phone number" data-rule="phonenumber" data-msg="PhoneNumber" />
+                  <div class="validation"></div>
+                </div>
+                    <div class="form-group">
+                  <input type="text" class="form-control" required="" name="state" id="state" placeholder="Your State" data-rule="state" data-msg="State" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="place" id="place" placeholder="Your Company Location(place)" data-rule="place" data-msg="place" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="owner" id="owner" placeholder="Your Company Owner" data-rule="owner" data-msg="Company owner" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="websiteid" id="websiteid" placeholder="Your Company Website id" data-rule="websiteid" data-msg="Company Website id" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <textarea class="form-control" required="" name="description" rows="5" data-rule="required" data-msg="Please Company Description" placeholder="Your Company Description"></textarea>
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="email" name="email" required="" class="form-control" id="email" placeholder="Your Email id" data-msg="Please enter email" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="username" id="username" placeholder="Your Username" data-rule="username" data-msg="Please enter Username" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" required="" name="password" id="password" placeholder="Your Password" data-rule="password" data-msg="Please enter Password" />
+                  <div class="validation"></div>
+                </div>
+                <div class="text-center">
+                  <input type="submit" class="btn btn-primary" name="sub" value="Register"/>
+                </div>
+              </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- #about -->
+  </main>
+{% endblock %}

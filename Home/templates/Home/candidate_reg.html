@@ -1,0 +1,81 @@
+{% extends 'Home/shared/base.html' %}
+{% load static %}
+{% block content %}
+
+  <main id="main">
+    <section id="about" style="margin-top:10%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-6">
+            <div class="about-img">
+              <img src="{% static 'img/candidate.jpg' %}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-6">
+            <div class="about-content">
+              <h2 align="center">Candidate Registration Here</h2>
+                 <div class="form">
+
+              <form action="{% url 'candregprocess' %}" method="POST" name="log">
+                {% csrf_token %}
+                   <div class="form-group">
+                  <input type="text" name="name" required="" class="form-control" id="name" placeholder="Your Name" data-msg="Please enter name" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" required="" name="dob" id="dob" placeholder="Your Date Of Birth" data-rule="dob" data-msg="Date Of Birth" />
+                  <div class="validation"></div>
+                </div>
+                   <div class="form-group">
+                  <textarea class="form-control" required="" name="address" rows="5" data-rule="required" data-msg="Please enter address" placeholder="Your Address"></textarea>
+                  <div class="validation"></div>
+                </div>
+                 <div class="form-group">
+                  <input type="text" class="form-control" required="" name="phonenumber" id="phonenumber" placeholder="Your phone number" data-rule="phonenumber" data-msg="PhoneNumber" />
+                  <div class="validation"></div>
+                </div>
+                    <div class="form-group">
+                  <input type="text" class="form-control" required="" name="state" id="state" placeholder="Your State" data-rule="state" data-msg="State" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="place" id="place" placeholder="Your  Location(place)" data-rule="place" data-msg="place" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group"><label><b>Gender &nbsp;&nbsp;:&nbsp;&nbsp;</b> </label>
+                  <input type="radio"  name="gender" id="gender1" value="male" data-rule="gender" data-msg="your gender" />&nbsp;Male &nbsp;&nbsp;
+                  <input type="radio"  name="gender" id="gender2" value="female" data-rule="gender" data-msg="your gender" />&nbsp;Female &nbsp;&nbsp;
+                  <input type="radio"  name="gender" id="gender3" value="other" data-rule="gender" data-msg="your gender" />&nbsp;Other &nbsp;&nbsp;
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group"><label><b>Qualification &nbsp;&nbsp;:&nbsp;&nbsp;</b> </label>
+                  <input type="checkbox"  name="qualification" id="qualification1" value="ME/M.tech" data-rule="qualification1" data-msg="your qualification" />&nbsp;ME/M.tech &nbsp;&nbsp;
+                  <input type="checkbox"  name="qualification" id="qualification2" value="BE/B.tech" data-rule="qualification1" data-msg="your qualification" />&nbsp;BE/B.tech &nbsp;&nbsp;
+                  <input type="checkbox"  name="qualification" id="qualification3" value="Degree" data-rule="qualification1" data-msg="your qualification" />&nbsp; Degree &nbsp;&nbsp;
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="email" name="email" required="" class="form-control" id="email" placeholder="Your Email id" data-msg="Please enter email" />
+                  <div class="validation"></div>
+                </div>
+                  <div class="form-group">
+                  <input type="text" class="form-control" required="" name="username" id="username" placeholder="Your Username" data-rule="username" data-msg="Please enter Username" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" required="" name="password" id="password" placeholder="Your Password" data-rule="password" data-msg="Please enter Password" />
+                  <div class="validation"></div>
+                </div>
+                <div class="text-center">
+                  <input type="submit" class="btn btn-primary" name="sub" value="Register"/>
+                </div>
+              </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- #about -->
+  </main>
+{% endblock %}
