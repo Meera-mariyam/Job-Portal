@@ -17,7 +17,7 @@
             <div class="about-content">
               <h2 align="center">Company Registration Here</h2>
                  <div class="form">
-              <form action="{% url 'companyregprocess' %}" method="POST" name="log">
+              <form action="{% url 'companyreg' %}" method="POST" name="log">
                 {% csrf_token %}
                   <div class="form-group">
                   <input type="text" name="companyname" required="" class="form-control" id="companyname" placeholder="Your Compnay Name" data-msg="Please enter Company name" />

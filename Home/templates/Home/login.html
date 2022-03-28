@@ -24,7 +24,7 @@
               <h2 align="center">Login Here</h2>
                  <div class="form">
 
-              <form action="{% url 'loginprocess' %}" method="POST" name="log">
+              <form action="{% url 'login' %}" method="POST" name="log">
                 {% csrf_token %}
                   <div class="form-group">
                   <input type="email" name="email" class="form-control" id="email" placeholder="Your Email id" data-msg="Please enter email" />

@@ -16,7 +16,7 @@
               <h2 align="center">Candidate Registration Here</h2>
                  <div class="form">
 
-              <form action="{% url 'candregprocess' %}" method="POST" name="log">
+              <form action="{% url 'candreg' %}" method="POST" name="log">
                 {% csrf_token %}
                    <div class="form-group">
                   <input type="text" name="name" required="" class="form-control" id="name" placeholder="Your Name" data-msg="Please enter name" />

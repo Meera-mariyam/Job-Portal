@@ -31,7 +31,7 @@
               <!-- /. tools -->
             </div>
             <div class="box-body">
-              <form action="{% url 'applyvacancyprocess' %}" method="POST" enctype="multipart/form-data">
+              <form action="{% url 'Applyvacancy'   %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                   <input type="hidden" name="vid" value="{{vid.id}}">
                   <div class="form-group"><label>Candidate Name</label>

@@ -36,7 +36,7 @@
               <!-- /. tools -->
             </div>
             <div class="box-body">
-              <form action="{% url 'vacancyprocess' %}" method="post">
+              <form action="{% url 'addvacancy' %}" method="post">
                 {% csrf_token %}
                   <div class="form-group"><label>Reference Code</label>
                   <input type="text" class="form-control" name="referenceid" placeholder="Reference Id">
