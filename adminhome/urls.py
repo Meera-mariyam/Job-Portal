@@ -13,5 +13,5 @@ urlpatterns = [
     path('acceptcandidate/<int:id>', Acceptcandidate.as_view(), name="acceptcandidate"),
     path('rejectcandidate/<int:id>', Rejectcandidate.as_view(), name="rejectcandidate"),
 
-    path('alogout/',alogout,name='alogout')
+    path('alogout/',Logout.as_view(),name='alogout')
 ]

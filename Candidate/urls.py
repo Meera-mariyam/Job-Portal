@@ -7,5 +7,5 @@ urlpatterns = [
     path('searchvacancy', Searchvacancy.as_view(),name="searchvacancy"),
     path('applyvacancy/<int:id>',Apply.as_view(),name="apply"),
     path('applyvacancy/',Applyvacancy.as_view(),name='Applyvacancy'),
-    path('calogout/',calogout,name='calogout')
+    path('calogout/',Calogout.as_view(),name='calogout')
 ]

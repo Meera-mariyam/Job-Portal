@@ -98,12 +98,9 @@ class idvacancy(request,id):
 
 '''
 
-def clogout(request):
-    try:
-      del request.session['email']
-    except:
-      pass
-    messages.info(request,'You are successfully logged off')
-    return redirect('login')
+class Clogout(View):
+    def get(self,request):
+        messages.info(request,'You are successfully logged off')
+        return redirect('login')
     #return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")
 

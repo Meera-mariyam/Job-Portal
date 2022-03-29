@@ -107,11 +107,8 @@ class Applyvacancy(UpdateView):
         #return HttpResponse("<script>alert('Successfully apply vacancy');window.location ='vacancies/';</script>")
 
 
-def calogout(request):
-    try:
-      del request.session['email']
-    except:
-      pass
-    messages.info(request,'You are Successfully logged off')
-    return redirect('login')
+class Calogout(View):
+    def get(self,request):
+        messages.info(request,'You are Successfully logged off')
+        return redirect('login')
     #return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")

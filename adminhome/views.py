@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.template import loader
@@ -7,18 +8,16 @@ from django.conf import settings
 from Home.models import Company,Candidate,Login
 from django.views.generic import View,TemplateView,UpdateView,ListView
 from django.contrib import messages
+from django.core.mail import send_mail
 
 
 class Adminhomee(TemplateView):
     template_name = 'adminhome/adminhome.html'
 
-def alogout(request):
-    try:
-      del request.session['email']
-    except:
-      pass
-    messages.info(request,'You are successfully logged off')
-    return redirect('/login')
+class Logout(View):
+    def get(self,request):
+        messages.info(request,'You are successfully logged off')
+        return redirect('/login')
     #return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")
 
 
@@ -54,11 +53,13 @@ class Acceptcompany(ListView):
     def get(self,request,id):
         accep = Login.objects.get(id = id)
         accecmp = Company.objects.get(login_id = id)
+        email = accecmp.email
+        print(email)
         accep.status = 1
         accecmp.status = 1
         accep.save()
         accecmp.save()
-        messages.info(request,'Accepted')
+        send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, email, fail_silently=False)
         return redirect('newcompany')
         #return HttpResponse("<script>alert('Accepted ...');window.location ='../newcompany/';</script>")
 
@@ -66,11 +67,13 @@ class Acceptcandidate(View):
     def get(self,request,id):
         accep = Login.objects.get(id = id)
         accecan = Candidate.objects.get(login_id = id)
+        email = accecan.email
+        #print(email)
         accep.status = 1
         accecan.status = 1
         accep.save()
         accecan.save()
-        messages.info(request,'Accepted')
+        send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, [email], fail_silently=False)
         return redirect('newcandidate')
         #return HttpResponse("<script>alert('Accepted....');window.location='../newcandidate/';</script>")
 
@@ -78,8 +81,10 @@ class Rejectcompany(UpdateView):
     def post(self,request,id):
         rej = Login.objects.get(id = id)
         rejc = Company.objects.get(login_id = id)
+        email = rejc.email
         rej.delete()
         rejc.delete()
+        send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, [email], fail_silently=False)
         messages.info(request,'Rejected')
         return redirect('newcompany')
         #return HttpResponse("<script>alert('Rejected..');window.location ='../newcompany/';</script>")
@@ -88,9 +93,11 @@ class Rejectcandidate(UpdateView):
     def post(self,request,id):
         rejcn = Login.objects.get(id=id)
         rejcnd = Candidate.objects.get(login_id=id)
+        email = rejcnd.email
         #email = rejcnd.email
         rejcn.delete()
         rejcnd.delete()
+        send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, [email], fail_silently=False)
         messages.info(request,'Rejected')
         return redirect('newcandidate')
         #return HttpResponse("<script>alert('Rejected.. ');window.location ='../newcandidate/';</script>")
