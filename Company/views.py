@@ -6,6 +6,7 @@ from Home.models import Company,Candidate,Login
 from Company.models import Vacancies
 from Candidate.models import ApplyVacancy
 from django.core.checks import messages
+from django.contrib import messages
 from django.views.generic import View,TemplateView,FormView
 
 class Companyhome(TemplateView):
@@ -34,7 +35,7 @@ class Addvacancy(View):
         dateapply = request.POST.get("dateapply")
         venue = request.POST.get("venue")
         contact = request.POST.get("contact")
-        vacan = Vacancies()
+        '''vacan = Vacancies()
         vacan.companyid_id = compid
         vacan.login_id = lid
         vacan.reference_code = refcode
@@ -52,7 +53,9 @@ class Addvacancy(View):
         vacan.joblocation = venue
         vacan.contactno = contact
         vacan.status =1
-        vacan.save()
+        vacan.save()'''
+        Vacancies(companyid_id = compid,login_id = lid,reference_code = refcode,jobtitle = jobtitle,description = description,keyskill = skills,qualification = qualification,city = city,state = state,pincode = pincode,experience = experience,no_opening = opening,publishedon = publishedon,lastdate = dateapply,joblocation = venue,contactno = contact,status =1).save
+        messages.info(request,'Successfully added vacancy')
         #return HttpResponse("<script>alert('Successfully add vacancy');window.location ='company/company.html';</script>")
         return render(request,'company/company.html')
 
@@ -100,5 +103,7 @@ def clogout(request):
       del request.session['email']
     except:
       pass
-    return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")
+    messages.info(request,'You are successfully logged off')
+    return redirect('login')
+    #return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")
 

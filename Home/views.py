@@ -1,4 +1,3 @@
-from pyexpat import model
 from urllib import request
 from django.shortcuts import render,redirect
 from django.template import loader
@@ -9,6 +8,7 @@ from django.urls import reverse_lazy
 from Home.models import Login,Company,Candidate
 from django.views.generic import UpdateView
 from django.views.generic import View,TemplateView
+from django.contrib import messages
 
 # Create your views here.
 class Index(TemplateView) :
@@ -72,16 +72,18 @@ class  Candreg(View):
     def get(self,request):
         return render(request,'Home/candidate_reg.html')
     def post(self,request):
-        logincn = Login()
+        #logincn = Login()
         email = request.POST.get('email')
         password = request.POST.get('password')
-        logincn.email= email
+        '''logincn.email= email
         logincn.password =password
         logincn.category = 'candidate'
         logincn.status = 0
-        logincn.save()
+        logincn.save()'''
+        cal =Login(email= email,password =password,category = 'candidate',status = 0)
+        cal.save()
         
-        cand = Candidate()
+        #cand = Candidate()
         name = request.POST.get('name')
         addr = request.POST.get('address')
         dob = request.POST.get('dob')
@@ -92,7 +94,7 @@ class  Candreg(View):
         gender = request.POST.get('gender')
         email = request.POST.get('email')
         username =request.POST.get('username')
-        cand.candidatename = name
+        '''cand.candidatename = name
         cand.address = addr
         cand.dob = dob
         cand.phone = phone
@@ -104,25 +106,30 @@ class  Candreg(View):
         cand.username = username
         cand.login = logincn
         cand.status = 0
-        cand.save()
-        return HttpResponse("<script>alert('Thank you for registration..wait for admin approval..');window.location ='/home_index';</script>")
+        cand.save()'''
+        Candidate(candidatename = name,address = addr,dob = dob,phone = phone,state = state,place = place,qualification = qualification,gender = gender,email = email,login=cal,username = username,status = 0).save()
+        messages.info(request,'Thank you for registration..wait for admin approval..')
+        return redirect('home_index')
+        #return HttpResponse("<script>alert('Thank you for registration..wait for admin approval..');window.location ='/home_index';</script>")
 
 class Companyreg(View):
     def get(self,request):
         return render(request,'Home/company_reg.html')
 
     def post(self,request):
-        logincm = Login()
+        #logincm = Login()
         email = request.POST.get('email')
         password = request.POST.get('password')
-        logincm.email= email
-        logincm.password =password
-        logincm.category = 'company'
-        logincm.status = 0
-        logincm.save()
+        #logincm.email= email
+        #logincm.password =password
+        #logincm.category = 'company'
+        #logincm.status = 0
+        #logincm.save()
+        lc = Login(email= email,password =password,category = 'company',status = 0)
+        lc.save()
 
     
-        comp = Company()
+        #comp = Company()
         companyname = request.POST.get('companyname')
         regid = request.POST.get('cregid')
         address = request.POST.get('address')
@@ -134,7 +141,7 @@ class Companyreg(View):
         desp = request.POST.get('description')
         email = request.POST.get('email')
         username = request.POST.get('username')
-        comp.companyname =companyname
+        '''comp.companyname =companyname
         comp.regid = regid
         comp.address = address
         comp.phone = phone
@@ -147,8 +154,13 @@ class Companyreg(View):
         comp.username = username
         comp.login =logincm
         comp.status = 0
-        comp.save()
-        return HttpResponse("<script>alert('Thank you for registration..wait for admin approval..');window.location ='/home_index';</script>")
+        comp.save()'''
+       # comp.login = logincm
+       # comp.save()
+        Company(companyname =companyname,regid = regid,address = address,phone = phone,state = state,place = place,companyowner = owner,websiteid = websiteid,description = desp,email = email,login=lc,username = username,status = 0).save()
+        messages.info(request,'Thank you for registration..wait for admin approval..')
+        return redirect('home_index')
+        #return HttpResponse("<script>alert('Thank you for registration..wait for admin approval..');window.location ='/home_index';</script>")
 
 
 

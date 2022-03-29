@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.mail import send_mail
@@ -8,6 +8,7 @@ from Home.models import Company,Candidate,Login
 from Company.models import Vacancies
 from Candidate.models import ApplyVacancy
 from django.views.generic import View,TemplateView,UpdateView
+from django.contrib import messages
 
 class Candidatehome(TemplateView):
     template_name = 'candidate/candidate.html'
@@ -88,7 +89,7 @@ class Applyvacancy(UpdateView):
         location = request.POST.get("location")
         uploadresume = request.FILES.get("resumeupload")
 
-        av = ApplyVacancy()
+        '''av = ApplyVacancy()
         av.candidatename = candidatename
         av.candidatemail = candidatemail
         av.qualification = qual
@@ -99,8 +100,11 @@ class Applyvacancy(UpdateView):
         av.resume = uploadresume
         av.candlogin_id = lid
         av.vacancyid_id = vid
-        av.save()
-        return HttpResponse("<script>alert('Successfully apply vacancy');window.location ='vacancies/';</script>")
+        av.save()'''
+        ApplyVacancy(candidatename = candidatename,candidatemail = candidatemail,qualification = qual,keyskill = skill,experience = experience,location = location,contactno = contact,resume = uploadresume, candlogin_id = lid,vacancyid_id = vid)
+        messages.info(request,'Sucessfully Applied')
+        return redirect('vacancies')
+        #return HttpResponse("<script>alert('Successfully apply vacancy');window.location ='vacancies/';</script>")
 
 
 def calogout(request):
@@ -108,4 +112,6 @@ def calogout(request):
       del request.session['email']
     except:
       pass
-    return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")
+    messages.info(request,'You are Successfully logged off')
+    return redirect('login')
+    #return HttpResponse("<script>alert('you are successfully Logged off..');window.location ='/login';</script>")

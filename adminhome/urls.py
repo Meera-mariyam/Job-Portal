@@ -3,15 +3,15 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('allcompany/',allcompany,name='allcompany'),
-    path('allcandidate',allcandidate,name='allcandidate'),
-    path('newcompany/',newcompany,name='newcompany'),
-    path('newcandidate/',newcandidate,name='newcandidate'),
-    path('Adminhomee/',Adminhomee,name='Adminhomee'),
-    path('acceptcompany/<int:id>',acceptcompany, name="acceptcompany"),
-    path('rejectcompany/<int:id>',rejectcompany, name="rejectcompany"),
-    path('acceptcandidate/<int:id>', acceptcandidate, name="acceptcandidate"),
-    path('rejectcandidate/<int:id>', rejectcandidate, name="rejectcandidate"),
+    path('allcompany/',Allcompany.as_view(),name='allcompany'),
+    path('allcandidate',Allcandidate.as_view(),name='allcandidate'),
+    path('newcompany/',Newcompany.as_view(),name='newcompany'),
+    path('newcandidate/',Newcandidate.as_view(),name='newcandidate'),
+    path('Adminhomee/',Adminhomee.as_view(),name='Adminhomee'),
+    path('acceptcompany/<int:id>',Acceptcompany.as_view(), name="acceptcompany"),
+    path('rejectcompany/<int:id>',Rejectcompany.as_view(), name="rejectcompany"),
+    path('acceptcandidate/<int:id>', Acceptcandidate.as_view(), name="acceptcandidate"),
+    path('rejectcandidate/<int:id>', Rejectcandidate.as_view(), name="rejectcandidate"),
 
     path('alogout/',alogout,name='alogout')
 ]
