@@ -9,7 +9,7 @@ from Home.models import Company,Candidate,Login
 from django.views.generic import View,TemplateView,UpdateView,ListView
 from django.contrib import messages
 from django.core.mail import send_mail
-
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 class Adminhomee(TemplateView):
     template_name = 'adminhome/adminhome.html'
@@ -25,14 +25,26 @@ class Allcompany(View) :
     def get(self,request):
         sta = 1
         comp1 = Company.objects.select_related().filter(status=sta)
-        context = {'comp': comp1}
+        paginator = Paginator(comp1,3)
+        page = request.GET.get('page')
+        try :
+            comp1 = paginator.page(1)
+        except PageNotAnInteger:
+            comp1 = paginator.page(paginator.num_pages)
+        context = {'comp': comp1,'page':page}
         return render(request, 'adminhome/allcompany.html', context)
 
 class Allcandidate(View):
     def get(self,request):
         sta = 1
         cond1 = Candidate.objects.select_related().filter(status=sta)
-        context = {'cond':cond1}
+        paginator = Paginator(cond1,3)
+        page = request.GET.get('page')
+        try :
+            comp1 = paginator.page(1)
+        except PageNotAnInteger:
+            comp1 = paginator.page(paginator.num_pages)
+        context = {'cond':cond1,'page':page}
         return render(request,'adminhome/allcandidate.html',context)
 
 class Newcandidate(View):
@@ -73,7 +85,7 @@ class Acceptcandidate(View):
         accecan.status = 1
         accep.save()
         accecan.save()
-        send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, [email], fail_silently=False)
+        #send_mail('Accepted', 'You are accepted now you can login to your account', settings.EMAIL_HOST_USER, [email], fail_silently=False)
         return redirect('newcandidate')
         #return HttpResponse("<script>alert('Accepted....');window.location='../newcandidate/';</script>")
 

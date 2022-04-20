@@ -1,3 +1,4 @@
+import email
 from urllib import request
 from django.shortcuts import render,redirect
 from django.template import loader
@@ -9,6 +10,7 @@ from Home.models import Login,Company,Candidate
 from django.views.generic import UpdateView
 from django.views.generic import View,TemplateView
 from django.contrib import messages
+from django.contrib import auth
 
 # Create your views here.
 class Index(TemplateView) :
@@ -126,4 +128,32 @@ class LoginView(View):
             template = loader.get_template("home/login.html")
             context = {"error": "Incorrect Information"}
             return render(request,'candidate/candidate.html')
+
+'''
+class LoginView(View):
+    def get(self,request):
+        return render(request,"Home/login.html")
+    def post(self,request):
+        email=request.POST['email']
+        password=request.POST['password']
+        user=auth.authenticate(username=email,password=password)
+        #print(user)
+        if email == 'admin@gmail.com':
+            request.session["email"] = email
+            return redirect('Adminhomee')
+        if user is not None:
+            request.session["email"] = email
+            auth.login(request,user)
+            #send_mail('Login successful','Welcome to our mini bookstore!!',settings.EMAIL_HOST_USER,[username])
+            #request.session['AUTHSESSION']=username
+            return redirect('Candidatehome')
+        else:
+            messages.info(request,'invalid credentials')
+            return redirect('login')
+
+
+'''
+
+class Candidatehome(TemplateView):
+    template_name = 'candidate/candidate.html'
     

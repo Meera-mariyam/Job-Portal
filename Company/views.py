@@ -15,7 +15,7 @@ class Companyhome(TemplateView):
 
 class Addvacancy(View):
     def get(self,request):
-        return render( request,'Company/addvacancy.html')
+        return render( request,'company/addvacancy.html')
 
     def post(self,request):
         lid = request.session.get('userid')
